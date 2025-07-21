@@ -6,7 +6,7 @@ resource "aws_cognito_user_pool" "pool" {
 // this represents an application (like Postman, your website, or a mobile app) that wants to authenticate users using your user pool
 resource "aws_cognito_user_pool_client" "client" {
   name                                 = "cognito_client"
-  user_pool_id                         = aws_cognito_user_pool.my_cognito_user_pool.id
+  user_pool_id                         = aws_cognito_user_pool.pool.id
   allowed_oauth_flows_user_pool_client = true // this app will use OAuth 2.0 to log users in
   generate_secret = false 
   allowed_oauth_flows = ["implicit", "code"] // 0Auth flows
