@@ -100,8 +100,16 @@ resource "aws_api_gateway_integration_response" "options_integration_response" {
     aws_api_gateway_integration.options_integration,
   ]
 }
+
 // Okay, I’ve defined everything for this API. Now let’s actually deploy it so it works!
 resource "aws_api_gateway_deployment" "api_deployment" {
   rest_api_id = aws_api_gateway_rest_api.api_gateway.id
   depends_on  = [aws_api_gateway_integration.integration_request, aws_api_gateway_integration.options_integration]
+}
+
+// public URL to actually call it
+resource "aws_api_gateway_stage" "stage" {
+  deployment_id = aws_api_gateway_deployment.api_deployment.id
+  rest_api_id   = aws_api_gateway_rest_api.api_gateway.id
+  stage_name    = "dev"
 }
