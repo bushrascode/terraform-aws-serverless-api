@@ -9,6 +9,7 @@ resource "aws_cognito_user_pool_client" "client" {
   user_pool_id                         = aws_cognito_user_pool.pool.id
   allowed_oauth_flows_user_pool_client = true // this app will use OAuth 2.0 to log users in
   generate_secret = false 
+  allowed_oauth_scopes = ["aws.cognito.signin.user.admin","email", "openid", "profile"]
   allowed_oauth_flows = ["implicit", "code"] // 0Auth flows
   explicit_auth_flows = ["ADMIN_NO_SRP_AUTH", "USER_PASSWORD_AUTH"] // login methods allowed outside OAuth
   supported_identity_providers = ["COGNITO"] // only use Cognito's own user pool as the identity provider not google/facebook
