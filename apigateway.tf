@@ -117,7 +117,7 @@ resource "aws_api_gateway_stage" "stage" {
 
 //  only authenticated users can access api now
 resource "aws_api_gateway_authorizer" "authoriser" {
-  name                   = "cognito_authoriser"
+  name                   = "authoriser"
   rest_api_id            = aws_api_gateway_rest_api.api_gateway.id
   type = "COGNITO_USER_POOLS"
   provider_arns = [aws_cognito_user_pool.pool.arn]
