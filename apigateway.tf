@@ -25,7 +25,8 @@ resource "aws_api_gateway_integration" "integration_request" {
   resource_id             = aws_api_gateway_resource.root_path.id
   rest_api_id             = aws_api_gateway_rest_api.api_gateway.id
   integration_http_method = "POST"
-  type                    = "MOCK"
+  type                    = "AWS"
+  uri                     = aws_lambda_function.lambda_function.invoke_arn
 }
 // If the person knocks correctly and gives me the right secret code (like 200), I will allow them to pass and see what's behind the door
 resource "aws_api_gateway_method_response" "response_200" {
