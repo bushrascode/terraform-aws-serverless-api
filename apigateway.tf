@@ -15,6 +15,7 @@ resource "aws_api_gateway_resource" "root_path" {
 //"Okay, if someone goes to /mypath and tries to POST, we will allow it, and here's how we’ll handle it."
 resource "aws_api_gateway_method" "method_request" {
   authorization = "COGNITO_USER_POOLS"
+  authorizer_id = aws_api_gateway_authorizer.authoriser.id
   http_method   = "POST"
   resource_id   = aws_api_gateway_resource.root_path.id
   rest_api_id   = aws_api_gateway_rest_api.api_gateway.id
@@ -119,5 +120,5 @@ resource "aws_api_gateway_authorizer" "authoriser" {
   name                   = "cognito_authoriser"
   rest_api_id            = aws_api_gateway_rest_api.api_gateway.id
   type = "COGNITO_USER_POOLS"
-  provider_arns = aws_cognito_user_pool.pool.arn
+  provider_arns = [aws_cognito_user_pool.pool.arn]
 }
