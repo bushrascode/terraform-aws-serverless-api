@@ -10,3 +10,12 @@ terraform {
 provider "aws" {
   region = "us-east-2"
 }
+
+terraform {
+  required_providers {
+    archive = {
+      source = "hashicorp/archive"
+      version = "2.7.1"
+    }
+  }
+}
